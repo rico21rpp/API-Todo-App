@@ -51,3 +51,10 @@ def add_todo():
     db.session.commit()
 
     return todo_schema.jsonify(new_todo)
+
+
+# Get Single Todo Item
+@app.route('/todo/<id>', methods=['GET'])
+def get_todo(id):
+    todo = Todo.query.get(id)
+    return todo_schema.jsonify(todo)
