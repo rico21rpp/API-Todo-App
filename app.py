@@ -58,3 +58,11 @@ def add_todo():
 def get_todo(id):
     todo = Todo.query.get(id)
     return todo_schema.jsonify(todo)
+
+
+# Get All Todos
+@app.route('/todo', methods=['GET'])
+def get_todos():
+    todos = Todo.query.all()
+    result = todos_schema.dump(todos)
+    return jsonify(result.data)
