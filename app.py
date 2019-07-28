@@ -94,3 +94,8 @@ def delete_todo(id):
     db.session.commit()
 
     return todo_schema.jsonify(todo)
+
+
+# Run Server
+if __name__ == '__main__':
+    app.run(debug=True)
