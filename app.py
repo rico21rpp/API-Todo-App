@@ -84,3 +84,13 @@ def update_todo(id):
     db.session.commit()
 
     return todo_schema.jsonify(todo_old)
+
+
+# Delete Todo
+@app.route('/todo/<id>', methods=['DELETE'])
+def delete_todo(id):
+    todo = Todo.query.get(id)
+    db.session.delete(todo)
+    db.session.commit()
+
+    return todo_schema.jsonify(todo)
