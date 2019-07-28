@@ -39,3 +39,15 @@ class TodoSchema(ma.Schema):
 # init schema
 todo_schema = TodoSchema(strict=True)
 todos_schema = TodoSchema(many=True, strict=True)
+
+# Create Single Todo Item
+@app.route('/todo', methods=['POST'])
+def add_todo():
+    title = request.json['title']
+
+    new_todo = Todo(title)
+
+    db.session.add(new_todo)
+    db.session.commit()
+
+    return todo_schema.jsonify(new_todo)
