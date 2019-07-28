@@ -66,3 +66,21 @@ def get_todos():
     todos = Todo.query.all()
     result = todos_schema.dump(todos)
     return jsonify(result.data)
+
+
+# Update Todo
+@app.route('/todo/<id>', methods=['PUT'])
+def update_todo(id):
+    # get the old value
+    todo_old = Todo.query.get(id)
+
+    # get the new atribut value
+    title = request.json['title']
+
+    # set the new to the old
+    todo_old.title = title
+
+    # save to the db
+    db.session.commit()
+
+    return todo_schema.jsonify(todo_old)
